@@ -1,8 +1,3 @@
-
-
-
-
-
 def main():
     # read file
     file = open("file.txt", "r")
