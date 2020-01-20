@@ -42,7 +42,7 @@ class Cellule:
 
         fichier.close()
 
-def Plan(c,planVar,planVal,infOuSup): #planVar est égal à (x,y,z) ,planVar est la valeur par rapport à laquelle la cellule est testé ,infOuSup prend la valeur "inf" ou "sup"
+def Plan(c,VALxyz,planVal,infOuSup): #planVar est égal à (x,y,z) ,planVar est la valeur par rapport à laquelle la cellule est testé ,infOuSup prend la valeur "inf" ou "sup"
     if(planVar=="x"):
         if(infOuSup=="inf"):
             i=0

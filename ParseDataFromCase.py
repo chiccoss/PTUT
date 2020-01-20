@@ -23,13 +23,11 @@ class Cellule:
         fichier = open(
             "C:/Users/sohayb/Desktop/tree2D_advection_f1sigma0_1e-2_ccross_2_subelems0001_subfaces00_L1_K3/" + str(
                 iteratorFile) + "/micromesh.geo", "r")
-        lalignesuivante = fichier.readline()
-        lalignesuivante = fichier.readline()
-        lalignesuivante = fichier.readline()
-        lalignesuivante = fichier.readline()
-        lalignesuivante = fichier.readline()
-        lalignesuivante = fichier.readline()
-        lalignesuivante = fichier.readline()
+        i = 0
+        while (i < 7):
+            lalignesuivante = fichier.readline()
+            i = i + 1
+
         self.name = ('Mesh ' + str(iteratorFile))
         print(self.name)
         lalignesuivante = fichier.readline()
@@ -61,9 +59,9 @@ class Cellule:
 class Element_3D:
     liste = []
 
-    def __init__(self,base):
+    def __init__(self, base):
         onlyfiles = next(os.walk(base))[2]  # dir is your directory path as string
-        number=len(onlyfiles)  # nombre de fichier sans les dossiers dans le dossier
+        number = len(onlyfiles)  # nombre de fichier sans les dossiers dans le dossier
 
         allFiles = os.listdir(base)  # dir is your directory path
         number_files = len(allFiles)
@@ -76,12 +74,8 @@ class Element_3D:
             i = i + 1
 
 
-
-
-e1 = Element_3D(base = 'C:/Users/sohayb/Desktop/tree2D_advection_f1sigma0_1e-2_ccross_2_subelems0001_subfaces00_L1_K3/')
+e1 = Element_3D(base='C:/Users/sohayb/Desktop/tree2D_advection_f1sigma0_1e-2_ccross_2_subelems0001_subfaces00_L1_K3/')
 
 print("cou" + "cou")
 print("cou", e1.liste[2].name)
 print("cou", e1.liste[6].name)
-
-
