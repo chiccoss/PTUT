@@ -94,27 +94,21 @@ class Element_3D:
             print((currentMesh + 1), "OUT OF", self.nbMesh, "DONE")
 
     def test_x(self, numeroCell, x, marge, iterateur):
-        if self.liste[numeroCell].x_array[iterateur] < x + marge and self.liste[numeroCell].x_array[
-            iterateur] > x - marge:
+        if self.liste[numeroCell].x_array[iterateur] < x + marge and self.liste[numeroCell].x_array[iterateur] > x - marge:
             return True
 
     def test_y(self, numeroCell, y, marge, iterateur):
-        if self.liste[numeroCell].y_array[iterateur] < y + marge and self.liste[numeroCell].x_array[
-            iterateur] > y - marge:
+        if self.liste[numeroCell].y_array[iterateur] < y + marge and self.liste[numeroCell].x_array[iterateur] > y - marge:
             return True
 
     def test_z(self, numeroCell, z, marge, iterateur):
-        if self.liste[numeroCell].z_array[iterateur] < z + marge and self.liste[numeroCell].z_array[
-            iterateur] > z - marge:
+        if self.liste[numeroCell].z_array[iterateur] < z + marge and self.liste[numeroCell].z_array[iterateur] > z - marge:
             return True
 
     def test_Cellule(self, numeroCell, marge, positionJoueur):
         i = 0
         while (i < self.liste[numeroCell].nbrCoordonne):
-            if self.test_z(numeroCell, positionJoueur.z, marge, i) == True and self.test_y(numeroCell, positionJoueur.y,
-                                                                                           marge,
-                                                                                           i) == True and self.test_x(
-                    numeroCell, positionJoueur.x, marge, i) == True:
+            if self.test_z(numeroCell, positionJoueur.z, marge, i) == True and self.test_y(numeroCell, positionJoueur.y,marge,i) == True and self.test_x(numeroCell, positionJoueur.x, marge, i) == True:
                 return True
 
     def mesurer_Grille(self):
@@ -246,15 +240,15 @@ class Element_3D:
         if self.xmin == 9999 or self.xmax == 9999 or self.ymin == 9999 or self.ymax == 9999 or self.zmin == 9999 or self.zmax == 9999:
             return
         else:
-            grid = AddGrid(xlevels=[self.xmin, 0.2, 0.4, 0.6, 0.8, self.xmax],
-                           ylevels=[self.ymin, 0.3, 0.6, self.ymax],
-                           zlevels=range(self.zmin, 1, 1),
-                           bounds=[self.xmin, self.xmax, self.ymin, self.ymax, self.zmin - 0.1,
-                                   self.zmax + 0.1], ratios=aspRat,
-                           logCoords=[], AxisNames=["x", "y", "z"], AxisColor=[23, 87, 223],
-                           AxisWidth=0.1)
-            case = FindSource('MHMSolution')
-            MakeSelectable(case)
+            grid = AddGrid(xlevels=[self.xmin,0.1,0.8,  self.xmax],
+                           ylevels=[self.ymin,0.1,0.8, self.ymax],
+                           zlevels=range(self.zmin, self.zmax, 1),
+                           bounds=[self.xmin , self.xmax , self.ymin , self.ymax , self.zmin ,
+                                   self.zmax], ratios=aspRat, AxisColor=[23, 87, 223],
+                           AxisWidth=1)
+
+            MakeSelectable()  # case=FindSource('MHMSolution')
+        Show()
         Render()
 
 
@@ -305,231 +299,19 @@ class tetraedre:
         fichier.close()
 
 
-class Points:
-    x = 0
-    y = 0
-
-    def __init__(self):
-        self.x = 0
-        self.y = 0
-
-
-class TDCell:
-    def __init__(self, xmin, xmax, ymin, ymax):
-        self.PointMin = Points()
-        self.PointMin.x = xmin
-        self.PointMin.y = ymin
-
-        self.PointMax = Points()
-        self.PointMax.x = xmax
-        self.PointMax.y = ymax
-
-    def setMinsAndMaxes(self, xmin, xmax, ymin, ymax):
-        self.PointMin = Points()
-        self.PointMin.x = xmin
-        self.PointMin.y = ymin
-
-        self.PointMax = Points()
-        self.PointMax.x = xmax
-        self.PointMax.y = ymax
-
-
-class Grille:
-    liste = []
-    dirPath = ''
-    xmax = 9999
-    xmin = 9999
-    ymin = 9999
-    ymax = 9999
-    zmax = 9999
-    zmin = 9999
-
-    def __init__(self, taille,DIM,dirPath):
-        #self.Cells = [taille-1][taille-1]
-        self.tailleXoord = taille
-        self.tailleYoord = taille
-        self.dimension=DIM
-        self.nbMesh = getNbMesh(dirPath)
-        i = 0
-        dirPath = dirPath
-        liste = [self.nbMesh]
-        for currentMesh in range(self.nbMesh):
-            self.liste.append(Cellule(dirPath, currentMesh))
-            print((currentMesh + 1), "OUT OF", self.nbMesh, "DONE")
 
 
 
-
-    def mesurer_Grille(self):
-        self.xmax = self.gerer_xmax()
-        print("xmax : ", self.xmax)
-        self.xmin = self.gerer_xmin()
-        print("xmin : ", self.xmin)
-        self.ymax = self.gerer_ymax()
-        print("ymax : ", self.ymax)
-        self.ymin = self.gerer_ymin()
-        print("ymin : ", self.ymin)
-        self.zmax = self.gerer_zmax()
-        print("zmax : ", self.zmax)
-        self.zmin = self.gerer_zmin()
-        print("zmin : ", self.zmin)
-
-    def gerer_xmax(self):
-        imax = 0
-        max = 0
-        i = 0
-        y = 0
-        while i < self.nbMesh:
-            y = 0
-            while y < self.liste[i].nbrCoordonne:
-                if max < self.liste[i].x_array[y]:
-                    max = self.liste[i].x_array[y]
-                    imax = i
-                    break
-
-                y = y + 1
-
-            i = i + 1
-
-        return max
-
-    def gerer_xmin(self):
-        imin = 0
-        min = 0
-        i = 0
-        y = 0
-        while i < self.nbMesh:
-            y = 0
-            while y < self.liste[i].nbrCoordonne:
-                if min > self.liste[i].x_array[y]:
-                    min = self.liste[i].x_array[y]
-                    imin = i
-                    break
-
-                y = y + 1
-
-            i = i + 1
-        return min
-
-    def gerer_ymax(self):
-        imax = 0
-        max = 0
-        i = 0
-
-        while i < self.nbMesh:
-            y = 0
-            while y < self.liste[i].nbrCoordonne:
-                if max < self.liste[i].y_array[y]:
-                    max = self.liste[i].y_array[y]
-                    imax = i
-                    break
-
-                y = y + 1
-
-            i = i + 1
-        return max
-
-    def gerer_ymin(self):
-        imin = 0
-        min = 0
-        i = 0
-
-        while i < self.nbMesh:
-            y = 0
-            while y < self.liste[i].nbrCoordonne:
-                if min > self.liste[i].y_array[y]:
-                    min = self.liste[i].y_array[y]
-                    imin = i
-                    break
-
-                y = y + 1
-
-            i = i + 1
-        return min
-
-    def gerer_zmax(self):
-        imax = 0
-        max = 0
-        i = 0
-
-        while i < self.nbMesh:
-            y = 0
-            while y < self.liste[i].nbrCoordonne:
-                if max < self.liste[i].z_array[y]:
-                    max = self.liste[i].z_array[y]
-                    imax = i
-                    break
-
-                y = y + 1
-
-            i = i + 1
-        return max
-
-    def gerer_zmin(self):
-        imin = 0
-        min = 0
-        i = 0
-
-        while i < self.nbMesh:
-            y = 0
-            while y < self.liste[i].nbrCoordonne:
-                if min > self.liste[i].z_array[y]:
-                    min = self.liste[i].z_array[y]
-                    imin = i
-                    break
-
-                y = y + 1
-
-            i = i + 1
-        return min
-
-    def getTaille(self):
-        return self.tailleXoord
-
-    def getDimension(self):
-        return self.tailleXoord
-
-    def setTaille(self, taille):
-        self.taille = taille
-
-    def setDimension(self, dimension):
-        self.dimension = dimension
-
-    def fillGrid(self):
-        while(self.tailleXoord!=0):
-            while(self.tailleYoord!=0):
-                self.Cells[self.tailleXoord][self.tailleYoord]=TDCell()
-                self.tailleYoord -= self.tailleYoord
-        self.tailleXoord -= self.tailleXoord
-
-
-    def InsertGrid(self):
-        aspRat = [1, 1, 0.1]  # divide bathymetry by 100
-        if self.xmin == 9999 or self.xmax == 9999 or self.ymin == 9999 or self.ymax == 9999 or self.zmin == 9999 or self.zmax == 9999:
-            return
-        else:
-            grid = AddGrid(xlevels=[self.xmin, 0.2, 0.4, 0.6, 0.8, self.xmax],
-                           ylevels=[self.ymin, 0.2, 0.4, 0.6, 0.8, self.ymax],
-                           zlevels=range(self.zmin, 1, 1),
-                           bounds=[self.xmin, self.xmax, self.ymin, self.ymax, self.zmin - 0.1, self.zmax + 0.1],
-                           ratios=aspRat,
-                           logCoords=[], AxisNames=["x", "y", "z"], AxisColor=[23, 87, 223],
-                           AxisWidth=0.1)
-            case = FindSource('MHMSolution')
-            MakeSelectable(case)
-        Render()
+#class Grille:
+    #Cellule=[][12][12]
 
 
 """def creer(self):
     for currentMesh in range(self.nbMesh):"""
 
 dirPath = "C:/Users/sohayb/Desktop/tree2D_advection_f1sigma0_1e-2_ccross_2_subelems0001_subfaces00_L1_K3/"
-"""
+
 element3D = Element_3D(dirPath)
 element3D.mesurer_Grille()
-element3D.InsertGrid()"""
-
-grille = Grille(2, 2, dirPath)
-grille.mesurer_Grille()
-grille.InsertGrid()
+element3D.InsertGrid()
 # element3D.mesurer_Grille()
