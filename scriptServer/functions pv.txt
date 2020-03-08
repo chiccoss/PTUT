@@ -1,0 +1,95 @@
+READER IN FUNCTION READER  
+
+ "Reader of readers and writers algorithm"
+        self.mutex1.acquire()
+		#file = open(name, "r") 
+		#print (file.read())
+        self.mutex1.release()
+		
+		#base = 'C:/Users/sohayb/Desktop/tree2D_advection_f1sigma0_1e-2_ccross_2_subelems0001_subfaces00_L1_K3/'
+
+		#i=0
+		#while (i<num):
+			#temp=EnSightReader(CaseFileName= base+'/'+str(i)+'/micromesh.case')
+			#i=i+1
+			#Show(temp)
+		#Render()
+	
+		"""
+		j=1
+		while (j<num+1):
+			t=FindSource('EnSightReader'+str(j))
+			Delete(t)
+			j=j+1
+		Render()
+		"""
+       
+        #return retVal
+
+
+
+
+
+
+
+
+
+
+COUNTING DOCS
+
+base = 'C:/Users/sohayb/Desktop/tree2D_advection_f1sigma0_1e-2_ccross_2_subelems0001_subfaces00_L1_K3/'
+
+onlyfiles = next(os.walk(base))[2]  # dir is your directory path as string
+number = len(onlyfiles) #nombre de fichier sans les dossiers dans le dossier
+print(number)
+
+list= os.listdir(base)  # dir is your directory path
+number_files = len(list)
+print(number_files) #nombre total de touts les types de fichiers dans le dossier
+
+num=number_files-number
+
+print(num) #number of .case
+print("Numer of .case in file")
+
+
+
+
+
+
+
+READ AND DELETE ENSIGHT
+
+
+
+
+"""
+base = 'C:/Users/sohayb/Desktop/tree2D_advection_f1sigma0_1e-2_ccross_2_subelems0001_subfaces00_L1_K3/'
+
+
+#i=0
+#while (i<num):
+#   temp=EnSightReader(CaseFileName= base+'/'+str(i)+'/micromesh.case')
+    #i=i+1
+    #Show(temp)
+    #Render()
+	
+j=1
+while (j<num+1):
+    t=FindSource('EnSightReader'+str(j))
+    Delete(t)
+    j=j+1
+	
+#Render()
+"""
+
+
+"""
+camera=GetActiveCamera()
+camera.SetPosition(49,0,0)
+camera.SetViewAngle(1)
+angle=camera.GetViewAngle()
+position=camera.GetPosition()
+print(angle)
+print(position)
+Render()"""

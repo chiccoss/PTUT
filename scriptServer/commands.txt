@@ -1,0 +1,15 @@
+pv python
+
+C:\Users\sohayb\Documents\ParaView-5.4.1-Qt5-OpenGL2-Windows-64bit\bin\pvpython client.py
+
+
+
+pvserver
+
+C:\Users\sohayb\Documents\ParaView-5.4.1-Qt5-OpenGL2-Windows-64bit\bin\pvserver -rc -ch
+
+script server 
+
+C:\Users\sohayb\scriptServer
+
+pvserver with -rc
