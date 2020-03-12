@@ -25,7 +25,7 @@ interactor.SetInteractorStyle(vtk.vtkInteractorStyleTrackballCamera())
 interactor.SetRenderWindow(renwin)
 
 def DummyFunc1(obj, ev):
-    print("Middle Event")
+    quit()
 
 def DummyFunc2(obj, ev):
     print("Right Event")
@@ -38,7 +38,7 @@ def DummyFunc2(obj, ev):
 ## adding priorities allow to control the order of observer execution
 ## (highest value first! if equal the first added observer is called first)
 interactor.RemoveObservers('LeftButtonPressEvent')
-interactor.AddObserver('MiddleButtonPressEvent', DummyFunc1, 1.0)
+interactor.AddObserver('RightButtonPressEvent', DummyFunc1, 1.0)
 interactor.AddObserver('RightButtonPressEvent', DummyFunc2, -1.0)
 interactor.Initialize()
 interactor.Start()
