@@ -3,27 +3,7 @@ import threading
 import os
 import sys
 import time
-import asyncio
 import random
-
-
-def updateView():
-    camera = GetActiveCamera()
-    i= random.randint(0, 3)
-    if i == 0:
-        camera.SetPosition(0.1, 0.1, 0.0)
-    if i == 1:
-        camera.SetPosition(0.6, 0.1, 0.0)
-    if i == 2:
-        camera.SetPosition(0.1, 0.6, 0.0)
-    if i == 3:
-        camera.SetPosition(0.6, 0.6, 0.0)
-    else:
-        camera.SetPosition(0.6, 0.6, 0.0)
-
-    x, y, z = camera.GetPosition()
-    # print(x, y, z, flush=True)
-    FindMeshToUpload(x, y)
 
 
 def EnsightReadersBruh(string):
@@ -72,9 +52,21 @@ def FindMeshToUpload(x, y):
         EnsightReadersBruh("hd")  # les carreaux en haut a droite (1, 4 ,11, 10)
 
 
+def updateView():
+    camera = GetActiveCamera()
+    i = random.randint(0, 3)
+    if i == 0:
+        camera.SetPosition(0.1, 0.1, 0.0)
+    if i == 1:
+        camera.SetPosition(0.6, 0.1, 0.0)
+    if i == 2:
+        camera.SetPosition(0.1, 0.6, 0.0)
+    if i == 3:
+        camera.SetPosition(0.6, 0.6, 0.0)
+    x, y, z = camera.GetPosition()
+    FindMeshToUpload(x, y)
 
 
-threadWriter = threading.Thread(target=updateView)
-threadWriter.start()
-threadWriter.join()
-
+threadWriter = threading.Thread(target=updateView).start()
+#threadWriter
+#threadWriter.join()

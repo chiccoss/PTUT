@@ -1,6 +1,5 @@
 import threading
-
-
+"""
 def useFile(f1, f2):
     f1.open()
     f1.write("This is file 1")
@@ -17,4 +16,10 @@ def printt():
 thread = threading.Thread(target=printt)
 thread.start()
 thread.join()
-print("Sorti")
+print("Sorti")"""
+
+import random
+
+a = random.random(0, 4)
+print(a)
+
